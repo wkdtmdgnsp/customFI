@@ -1,6 +1,5 @@
 package project.customFI.member.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.customFI.member.domain.Member;
 import project.customFI.member.repository.MemberRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -26,8 +25,9 @@ class MemberServiceTest {
 
         // when
         Long saveId = memberService.join(member);
+        Member findMember = memberRepository.findById(member.getId()).get();
 
         // then
-        Assertions.assertThat(member).isEqualTo(memberRepository.findOne(saveId));
+        assertThat(member).isEqualTo(findMember);
     }
 }

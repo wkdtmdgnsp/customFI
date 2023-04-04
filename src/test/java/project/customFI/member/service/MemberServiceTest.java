@@ -33,6 +33,7 @@ class MemberServiceTest {
     }
 
     @Test
+    @DisplayName("중복회원 예외 테스트")
     void 중복_회원_예외() {
         // given
         Member member1 = new Member("qwaw12", "1234");
@@ -44,5 +45,17 @@ class MemberServiceTest {
         assertThatThrownBy(() -> {
             memberService.join(member2);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("회원 조회테 스트")
+    void 회원조회() {
+        // given
+        Member member = new Member("qwaw12", "1234");
+        memberService.join(member);
+        // when
+        Member findMember = memberService.findByUserId(member.getUserId());
+        // then
+        assertThat(findMember).isEqualTo(member);
     }
 }

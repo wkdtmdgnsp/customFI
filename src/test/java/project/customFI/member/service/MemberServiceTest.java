@@ -9,6 +9,7 @@ import project.customFI.member.domain.Member;
 import project.customFI.member.repository.MemberRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -29,5 +30,19 @@ class MemberServiceTest {
 
         // then
         assertThat(member).isEqualTo(findMember);
+    }
+
+    @Test
+    void 중복_회원_예외() {
+        // given
+        Member member1 = new Member("qwaw12", "1234");
+        Member member2 = new Member("qwaw12", "1234");
+        // when
+        memberService.join(member1);
+
+        // then
+        assertThatThrownBy(() -> {
+            memberService.join(member2);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

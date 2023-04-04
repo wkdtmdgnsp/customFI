@@ -15,7 +15,15 @@ public class MemberService {
 
     @Transactional
     public Long join(Member member) {
+        validateDuplicateMember(member);
         memberRepository.save(member);
-        return null;
+        return member.getId();
+    }
+
+    private void validateDuplicateMember(Member member) {
+        Member findMember = memberRepository.findByUserId(member.getUserId());
+        if (findMember != null) {
+            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+        }
     }
 }

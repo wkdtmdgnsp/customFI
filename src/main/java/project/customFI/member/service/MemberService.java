@@ -26,4 +26,8 @@ public class MemberService {
             throw new IllegalArgumentException("이미 존재하는 회원입니다.");
         }
     }
+
+    public Member findByUserId(String userId) {
+        return memberRepository.findByUserId(userId);
+    }
 }

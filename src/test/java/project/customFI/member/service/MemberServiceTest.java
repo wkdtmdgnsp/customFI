@@ -48,7 +48,7 @@ class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("회원 조회테 스트")
+    @DisplayName("회원 조회테스트")
     void 회원조회() {
         // given
         Member member = new Member("qwaw12", "1234");
@@ -57,5 +57,18 @@ class MemberServiceTest {
         Member findMember = memberService.findByUserId(member.getUserId());
         // then
         assertThat(findMember).isEqualTo(member);
+    }
+
+    @Test
+    @DisplayName("회원수정 테스트")
+    void 회원수정() {
+        // given
+        Member member = new Member("qwaw12", "1234");
+        memberService.join(member);
+        // when
+        memberService.update(member.getUserId(), "123456");
+        // then
+        Member findMember = memberService.findByUserId("qwaw12");
+        assertThat(findMember.getPassword()).isEqualTo("123456");
     }
 }

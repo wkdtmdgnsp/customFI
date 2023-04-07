@@ -28,4 +28,8 @@ public class Member extends BaseTimeEntity {
     private String userId;
 
     private String password;
+
+    public void passwordChange(String password) {
+        this.password = password;
+    }
 }

@@ -30,4 +30,10 @@ public class MemberService {
     public Member findByUserId(String userId) {
         return memberRepository.findByUserId(userId);
     }
+
+    @Transactional
+    public void update(String userId, String password) {
+        Member member = memberRepository.findByUserId(userId);
+        member.passwordChange(password);
+    }
 }

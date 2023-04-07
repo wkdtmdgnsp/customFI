@@ -71,4 +71,17 @@ class MemberServiceTest {
         Member findMember = memberService.findByUserId("qwaw12");
         assertThat(findMember.getPassword()).isEqualTo("123456");
     }
+
+    @Test
+    @DisplayName("회원탈퇴")
+    void 회원탈퇴 () {
+        // given
+        Member member = new Member("qwaw12", "1234");
+        memberService.join(member);
+        // when
+        memberService.delete("qwaw12");
+        // then
+        Member findMember = memberService.findByUserId("qwaw12");
+        assertThat(findMember).isNull();
+    }
 }

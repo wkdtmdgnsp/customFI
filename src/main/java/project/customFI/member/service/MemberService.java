@@ -36,4 +36,9 @@ public class MemberService {
         Member member = memberRepository.findByUserId(userId);
         member.passwordChange(password);
     }
+
+    @Transactional
+    public void delete(String userId) {
+        memberRepository.deleteByUserId(userId);
+    }
 }

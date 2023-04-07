@@ -7,4 +7,5 @@ import project.customFI.member.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Member findByUserId(@Param("userId") String userId);
+    void deleteByUserId(@Param("userId") String userId);
 }
